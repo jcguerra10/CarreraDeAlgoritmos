@@ -1,21 +1,21 @@
 package model;
 
 public class DataTree {
-	private int id;
+	private double id;
 
 	private DataTree right;
 	private DataTree left;
 
-	public DataTree(int id) {
+	public DataTree(double id) {
 		super();
 		this.id = id;
 	}
 
-	public int getId() {
+	public double getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(double id) {
 		this.id = id;
 	}
 

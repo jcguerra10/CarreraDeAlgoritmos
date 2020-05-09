@@ -1,19 +1,21 @@
 package model;
 
 public class DataArr {
-	private int id;
+	private double id;
 
-	public DataArr(int id) {
+	public DataArr(double id) {
 		super();
 		this.id = id;
 	}
 
-	public int getId() {
+	public double getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(double id) {
 		this.id = id;
 	}
+	
+	
 
 }

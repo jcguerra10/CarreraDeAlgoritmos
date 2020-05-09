@@ -1,20 +1,20 @@
 package model;
 
 public class DataList {
-	private int id;
+	private double id;
 
 	private DataList next;
 	private DataList prev;
 
-	public DataList(int id) {
+	public DataList(double id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public double getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(double id) {
 		this.id = id;
 	}
 
