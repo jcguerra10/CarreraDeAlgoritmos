@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Exceptions.NoPressedButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import model.CircleClass;
@@ -23,6 +25,8 @@ public class ControllerGUI implements Initializable {
 
 	private ArrayList<Double> ar;
 
+	@FXML
+	private Button run;
 	@FXML
 	private TextField n;
 	@FXML
@@ -83,7 +87,7 @@ public class ControllerGUI implements Initializable {
 					recursive.setSelected(false);
 					c.allMethods(nLong, 1, 2);
 				} else {
-					advice();
+					throw new NoPressedButton();
 				}
 				add.setSelected(false);
 			} else if (search.isSelected()) {
@@ -94,7 +98,7 @@ public class ControllerGUI implements Initializable {
 					recursive.setSelected(false);
 					c.allMethods(nLong, 2, 2);
 				} else {
-					advice();
+					throw new NoPressedButton();
 				}
 				search.setSelected(false);
 			} else if (delete.isSelected()) {
@@ -105,19 +109,25 @@ public class ControllerGUI implements Initializable {
 					recursive.setSelected(false);
 					c.allMethods(nLong, 3, 2);
 				} else {
-					advice();
+					throw new NoPressedButton();
 				}
 				delete.setSelected(false);
 			} else {
-				advice();
+				throw new NoPressedButton();
 			}
-
+			
+			run.setDisable(true);
 			startCircle();
 
 		} catch (NumberFormatException e) {
 			Alert a = new Alert(AlertType.WARNING);
 			a.setTitle("Espacio en blanco");
 			a.setContentText("Usted a dejado un espacio en blanco");
+			a.showAndWait();
+		} catch (NoPressedButton e) {
+			Alert a = new Alert(AlertType.WARNING);
+			a.setTitle("No ha presionado algun boton");
+			a.setContentText("Usted no ha presionado un boton");
 			a.showAndWait();
 		}
 	}
@@ -152,13 +162,6 @@ public class ControllerGUI implements Initializable {
 		c2.setRadius(cc2R);
 	}
 
-	private void advice() {
-		Alert a = new Alert(AlertType.WARNING);
-		a.setTitle("No ha presionado algun boton");
-		a.setContentText("Usted no ha presionado un boton");
-		a.showAndWait();
-	}
-
 	public void changeLabelArray(double sec) {
 		arr.setText(sec + " sec");
 		isRun1 = false;
@@ -181,6 +184,7 @@ public class ControllerGUI implements Initializable {
 	private void allThreadsFinish() {
 		if (isRun1 == false && isRun2 == false && isRun3 == false) {
 			circle = true;
+			run.setDisable(false);
 		}
 	}
 
