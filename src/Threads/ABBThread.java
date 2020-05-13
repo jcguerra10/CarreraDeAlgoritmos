@@ -2,6 +2,8 @@ package Threads;
 
 import java.util.ArrayList;
 
+import application.ControllerGUI;
+import javafx.application.Platform;
 import model.Controller;
 import model.DataTree;
 import model.Times;
@@ -10,6 +12,8 @@ public class ABBThread extends Thread {
 
 	private Controller c;
 
+	private ControllerGUI cgui;
+	
 	private int type;
 	private int mode;
 	
@@ -21,6 +25,7 @@ public class ABBThread extends Thread {
 		this.type = type;
 		this.mode = mode;
 		times = c.getTimes();
+		cgui = c.getCgui();
 	}
 
 	@Override
@@ -65,6 +70,15 @@ public class ABBThread extends Thread {
 		default:
 			break;
 		}
+		
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				cgui.changeLabelABB(Times.secondsABB);
+			}
+			
+		});
 	}
 
 	public void addABBIterative() throws InterruptedException {
@@ -75,7 +89,8 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsABB = (l1 - l)/1000;
+		System.out.println(l1-l +" ABB");
 	}
 
 	public void addABBrecursive() throws InterruptedException {
@@ -86,7 +101,7 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsABB = l1 - l/1000;
 	}
 
 	public void searchABBIterative() throws InterruptedException {
@@ -97,7 +112,7 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsABB = l1 - l/1000;
 	}
 
 	public void searchABBRecursive() throws InterruptedException {
@@ -108,7 +123,7 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsABB = l1 - l/1000;
 	}
 
 	public void eliminateABBIterative() {

@@ -2,6 +2,8 @@ package Threads;
 
 import java.util.ArrayList;
 
+import application.ControllerGUI;
+import javafx.application.Platform;
 import model.Controller;
 import model.DataArr;
 import model.DataList;
@@ -12,6 +14,8 @@ public class ArrThread extends Thread {
 
 	private Controller c;
 
+	private ControllerGUI cgui;
+	
 	private Times times;
 	private int type;
 	private int mode;
@@ -22,6 +26,7 @@ public class ArrThread extends Thread {
 		this.type = type;
 		this.mode = mode;
 		times = c.getTimes();
+		cgui = c.getCgui();
 	}
 
 	@Override
@@ -66,7 +71,14 @@ public class ArrThread extends Thread {
 		default:
 			break;
 		}
-		c.updaterArray();
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				cgui.changeLabelArray(Times.secondsArray);
+			}
+			
+		});		
 	}
 
 	public void addArray() throws InterruptedException {
@@ -77,7 +89,8 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		System.out.println(l1-l +" Arr");
+		Times.secondsArray = (l1 - l)/1000;
 	}
 
 	public void searchArrayIterative() throws InterruptedException {
@@ -88,7 +101,7 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsArray = l1 - l/1000;
 	}
 
 	public void searchArrayRecursive() throws InterruptedException {
@@ -99,7 +112,7 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsArray = l1 - l/1000;
 	}
 
 	public void eliminateArrayIterative() throws InterruptedException {
@@ -110,7 +123,7 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsArray = l1 - l/1000;
 	}
 
 	public void eliminateArrayRecursive() throws InterruptedException {
@@ -121,7 +134,7 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l;
+		Times.secondsArray = l1 - l/1000;
 	}
 
 }

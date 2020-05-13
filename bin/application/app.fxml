@@ -87,8 +87,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Circle fill="#ffffff00" layoutX="649.0" layoutY="77.0" radius="49.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#ffffff00" layoutX="649.0" layoutY="77.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c1" fill="#ffffff00" layoutX="649.0" layoutY="77.0" radius="49.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c2" fill="#ffffff00" layoutX="649.0" layoutY="77.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="372.0" layoutY="107.0" text="Final Results">
          <font>
             <Font name="System Bold" size="28.0" />

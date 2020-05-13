@@ -331,7 +331,7 @@ public class Controller {
 
 	// ----------------priority methods----------------//
 
-	public double[] allMethods(long n, int type, int mode) throws InterruptedException {
+	public void allMethods(long n, int type, int mode) throws InterruptedException {
 		double[] allTimes = new double[3];
 
 		generateNumbers(n);
@@ -344,21 +344,6 @@ public class Controller {
 		list.start();
 		abb.start();
 
-		Platform.runLater(new Thread() {
-			
-			@Override
-			public void run() {
-				allTimes[0] = Times.secondsArray;
-				allTimes[1] = Times.secondsList;
-				allTimes[2] = Times.secondsABB;
-
-				System.out.println(Times.secondsArray);
-				System.out.println(Times.secondsList);
-				System.out.println(Times.secondsABB);
-			}
-		});
-
-		return allTimes;
 	}
 
 	public void updaterArray() {
