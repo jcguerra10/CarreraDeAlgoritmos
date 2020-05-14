@@ -99,7 +99,6 @@ public class ListThread extends Thread {
 		ArrayList<Double> arrget = c.getDataArr();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.addListIterative((new DataList(arrget.get(i))));
-			System.out.println(i);
 		}
 	}
 	
@@ -112,8 +111,6 @@ public class ListThread extends Thread {
 		}
 		Long l1 = System.currentTimeMillis();		
 		Times.secondsList = (l1 - l);
-		
-		System.out.println(l1-l +" list");
 		c.setFirstDataList(null);
 	}
 	
@@ -134,11 +131,9 @@ public class ListThread extends Thread {
 		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
-			System.out.println(c.searchListIterative(arrget.get(i)));
-			System.out.println(i);
+			c.searchListIterative(arrget.get(i));
 			Thread.sleep(100);			
 		}
-		System.out.println("sali");
 		Long l1 = System.currentTimeMillis();
 		Times.secondsList = l1 - l;
 		c.setFirstDataList(null);
@@ -162,7 +157,7 @@ public class ListThread extends Thread {
 		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
-			System.out.println(c.deleteListIterative(arrget.get(i)));
+			c.deleteListIterative(arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();

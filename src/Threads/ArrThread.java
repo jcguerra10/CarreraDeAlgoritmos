@@ -97,7 +97,6 @@ public class ArrThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		System.out.println(l1-l +" Arr");
 		Times.secondsArray = (l1 - l);
 		c.setArr(new ArrayList<DataArr>());
 	}

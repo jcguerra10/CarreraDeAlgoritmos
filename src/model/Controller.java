@@ -224,7 +224,7 @@ public class Controller {
 				} else {
 					temp = temp.getRight();
 				}
-			} else if (search < temp.getId()) {
+			} else if (search <= temp.getId()) {
 				if (temp.getLeft() == null) {
 					e = true;
 				} else {
@@ -246,7 +246,7 @@ public class Controller {
 			} else {
 				exist = searchTreeRecursive(temp.getRight(), search);
 			}
-		} else if (search < temp.getId()) {
+		} else if (search <= temp.getId()) {
 			if (temp.getLeft() == null) {
 				exist = false;
 			} else {
@@ -331,7 +331,7 @@ public class Controller {
 		}
 		return exist;
 	}
-
+	
 	// ----------------priority methods----------------//
 
 	public void allMethods(long n, int type, int mode) throws InterruptedException {
