@@ -67,6 +67,7 @@ public class ABBThread extends Thread {
 			} else {
 				eliminateABBRecursive();
 			}
+			break;
 		default:
 			break;
 		}
@@ -80,7 +81,14 @@ public class ABBThread extends Thread {
 			
 		});
 	}
-
+	
+	public void prepare() {
+		ArrayList<Double> arrget = c.getDataArr();
+		for (int i = 0; i < arrget.size(); i++) {
+			c.addOnTreeIterative(new DataTree(arrget.get(i)));
+		}
+	}
+	
 	public void addABBIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
 		Long l = System.currentTimeMillis();
@@ -89,8 +97,8 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsABB = (l1 - l)/1000;
-		System.out.println(l1-l +" ABB");
+		Times.secondsABB = (l1 - l);
+		c.setParentDataTree(null);
 	}
 
 	public void addABBrecursive() throws InterruptedException {
@@ -101,33 +109,38 @@ public class ABBThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsABB = l1 - l/1000;
+		Times.secondsABB = l1 - l;
+		c.setParentDataTree(null);
 	}
 
 	public void searchABBIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.searchTreeIterative(arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsABB = l1 - l/1000;
+		Times.secondsABB = l1 - l;
+		c.setParentDataTree(null);
 	}
 
 	public void searchABBRecursive() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.searchTreeRecursive(c.getParentDataTree(), arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsABB = l1 - l/1000;
+		Times.secondsABB = l1 - l;
+		c.setParentDataTree(null);
 	}
 
 	public void eliminateABBIterative() {
-
+		
 	}
 
 	public void eliminateABBRecursive() {

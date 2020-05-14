@@ -41,6 +41,12 @@ public class ControllerGUI implements Initializable {
 	private RadioButton recursive;
 
 	@FXML
+	private Label totalTime;
+	
+	private Long t1;
+	private Long t2;
+	
+	@FXML
 	private Label arr;
 	private boolean isRun1;
 	@FXML
@@ -82,9 +88,11 @@ public class ControllerGUI implements Initializable {
 			if (add.isSelected()) {
 				if (iterative.isSelected()) {
 					iterative.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 1, 1);
 				} else if (recursive.isSelected()) {
 					recursive.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 1, 2);
 				} else {
 					throw new NoPressedButton();
@@ -93,9 +101,11 @@ public class ControllerGUI implements Initializable {
 			} else if (search.isSelected()) {
 				if (iterative.isSelected()) {
 					iterative.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 2, 1);
 				} else if (recursive.isSelected()) {
 					recursive.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 2, 2);
 				} else {
 					throw new NoPressedButton();
@@ -104,9 +114,11 @@ public class ControllerGUI implements Initializable {
 			} else if (delete.isSelected()) {
 				if (iterative.isSelected()) {
 					iterative.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 3, 1);
 				} else if (recursive.isSelected()) {
 					recursive.setSelected(false);
+					t1 = System.currentTimeMillis();
 					c.allMethods(nLong, 3, 2);
 				} else {
 					throw new NoPressedButton();
@@ -163,19 +175,19 @@ public class ControllerGUI implements Initializable {
 	}
 
 	public void changeLabelArray(double sec) {
-		arr.setText(sec + " sec");
+		arr.setText(sec/1000 + " sec");
 		isRun1 = false;
 		allThreadsFinish();
 	}
 
 	public void changeLabelList(double sec) {
-		list.setText(sec + " sec");
+		list.setText(sec/1000 + " sec");
 		isRun2 = false;
 		allThreadsFinish();
 	}
 
 	public void changeLabelABB(double sec) {
-		abb.setText(sec + " sec");
+		abb.setText(sec/1000 + " sec");
 		isRun3 = false;
 		allThreadsFinish();
 	}
@@ -183,9 +195,17 @@ public class ControllerGUI implements Initializable {
 
 	private void allThreadsFinish() {
 		if (isRun1 == false && isRun2 == false && isRun3 == false) {
+			setTotalTimer();
 			circle = true;
-			run.setDisable(false);
+			run.setDisable(false);			
 		}
+	}
+
+	
+	private void setTotalTimer() {
+		t2 = System.currentTimeMillis();
+		double tt = (t2 - t1)/1000;
+		totalTime.setText(tt +"sec");
 	}
 
 	public Circle getC1() {

@@ -64,9 +64,11 @@ public class ListThread extends Thread {
 					e.printStackTrace();
 				}
 			}
+			break;
 		case 3:
 			if (mode == 1) {
 				try {
+					System.out.println("hello");
 					eliminateListIterative();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -80,6 +82,7 @@ public class ListThread extends Thread {
 					e.printStackTrace();
 				}
 			}
+			break;
 		default:
 			break;
 		}
@@ -92,6 +95,13 @@ public class ListThread extends Thread {
 			
 		});
 	}
+	public void prepare() {
+		ArrayList<Double> arrget = c.getDataArr();
+		for (int i = 0; i < arrget.size(); i++) {
+			c.addListIterative((new DataList(arrget.get(i))));
+			System.out.println(i);
+		}
+	}
 	
 	public void addListIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
@@ -101,11 +111,10 @@ public class ListThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();		
-		Times.secondsList = (l1 - l)/1000;
-		DataList temp = c.getFirstDataList();
+		Times.secondsList = (l1 - l);
 		
 		System.out.println(l1-l +" list");
-		
+		c.setFirstDataList(null);
 	}
 	
 	public void addListRecursive() throws InterruptedException {
@@ -116,51 +125,61 @@ public class ListThread extends Thread {
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsList = l1 - l/1000;
-	}
-	
-	public void searchListRecursive() throws InterruptedException {
-		ArrayList<Double> arrget = c.getDataArr();
-		Long l = System.currentTimeMillis();
-		for (int i = 0; i < arrget.size(); i++) {
-			c.searchListIterative(arrget.get(i));
-			Thread.sleep(100);
-			
-		}
-		Long l1 = System.currentTimeMillis();
-		Times.secondsList = l1 - l/1000;
+		Times.secondsList = l1 - l;
+		c.setFirstDataList(null);
 	}
 	
 	public void searchListIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
+		Long l = System.currentTimeMillis();
+		for (int i = 0; i < arrget.size(); i++) {
+			System.out.println(c.searchListIterative(arrget.get(i)));
+			System.out.println(i);
+			Thread.sleep(100);			
+		}
+		System.out.println("sali");
+		Long l1 = System.currentTimeMillis();
+		Times.secondsList = l1 - l;
+		c.setFirstDataList(null);
+	}
+	
+	public void searchListRecursive() throws InterruptedException {
+		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.searchListRecursive(c.getFirstDataList(), arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsList = l1 - l/1000;
+		Times.secondsList = l1 - l;
+		c.setFirstDataList(null);
 	}
 	
 	public void eliminateListIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
-			c.deleteListIterative(arrget.get(i));
+			System.out.println(c.deleteListIterative(arrget.get(i)));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsList = l1 - l/1000;
+		Times.secondsList = l1 - l;
+		c.setFirstDataList(null);
 	}
 	
 	public void eliminateListRecursive() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.deleteListRecursive(c.getFirstDataList(), arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsList = l1 - l/1000;
+		Times.secondsList = l1 - l;
+		c.setFirstDataList(null);
 	}
 }

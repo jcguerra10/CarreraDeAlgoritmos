@@ -196,6 +196,7 @@ public class Controller {
 			if (temp.getId() == search) {
 				exist = true;
 			}
+			temp = temp.getNext();
 		}
 		return exist;
 	}
@@ -293,6 +294,7 @@ public class Controller {
 			if (temp.getId() == search) {
 				if (temp.getPrev() == null) {
 					firstDataList = temp.getNext();
+					temp.setPrev(null);
 				} else {
 					DataList prev = temp.getPrev();
 					DataList next = temp.getNext();
@@ -303,6 +305,7 @@ public class Controller {
 				}
 				exist = true;
 			}
+			temp = temp.getNext();
 		}
 		return exist;
 	}

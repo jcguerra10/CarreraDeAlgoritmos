@@ -68,6 +68,7 @@ public class ArrThread extends Thread {
 
 				}
 			}
+			break;
 		default:
 			break;
 		}
@@ -81,6 +82,13 @@ public class ArrThread extends Thread {
 		});		
 	}
 
+	public void prepare() {
+		ArrayList<Double> arrget = c.getDataArr();
+		for (int i = 0; i < arrget.size(); i++) {
+			c.addArr(new DataArr(arrget.get(i)));
+		}
+	}
+	
 	public void addArray() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
 		Long l = System.currentTimeMillis();
@@ -90,51 +98,60 @@ public class ArrThread extends Thread {
 		}
 		Long l1 = System.currentTimeMillis();
 		System.out.println(l1-l +" Arr");
-		Times.secondsArray = (l1 - l)/1000;
+		Times.secondsArray = (l1 - l);
+		c.setArr(new ArrayList<DataArr>());
 	}
 
 	public void searchArrayIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.searchArrayIterative(arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l/1000;
+		Times.secondsArray = l1 - l;
+		c.setArr(new ArrayList<DataArr>());
 	}
 
 	public void searchArrayRecursive() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.searchArrayRecursive(0, arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l/1000;
+		Times.secondsArray = l1 - l;
+		c.setArr(new ArrayList<DataArr>());
 	}
 
 	public void eliminateArrayIterative() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.deleteArrayIterative(arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l/1000;
+		Times.secondsArray = l1 - l;
+		c.setArr(new ArrayList<DataArr>());
 	}
 
 	public void eliminateArrayRecursive() throws InterruptedException {
 		ArrayList<Double> arrget = c.getDataArr();
+		prepare();
 		Long l = System.currentTimeMillis();
 		for (int i = 0; i < arrget.size(); i++) {
 			c.deleteArrayRecursive(0, arrget.get(i));
 			Thread.sleep(100);
 		}
 		Long l1 = System.currentTimeMillis();
-		Times.secondsArray = l1 - l/1000;
+		Times.secondsArray = l1 - l;
+		c.setArr(new ArrayList<DataArr>());
 	}
 
 }

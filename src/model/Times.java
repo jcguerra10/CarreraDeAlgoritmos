@@ -12,6 +12,4 @@ public class Times {
 		secondsABB = 0;
 	}
 	
-	
-	
 }
